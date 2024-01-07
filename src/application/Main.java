@@ -11,6 +11,7 @@ public class Main {
 		Scanner scanner = new Scanner(System.in);
 		String conteudo;
 		char continuar;
+		String tarefas;
 
 		Agenda agenda = new Agenda();
 
@@ -21,7 +22,8 @@ public class Main {
 				System.out.println("1 - Adicionar tarefa na lista de tarefas.");
 				System.out.println("2 - Remover tarefa da lista de tarefas.");
 				System.out.println("3 - Exibir todas as tarefas da lista de tarefas.");
-				System.out.println("4 - Para sair do programa.");
+				System.out.println("4 - Listar tarefas concluidas.");
+				System.out.println("5 - Sair do programa.");
 				System.out.println();
 				System.out.print("Escolha uma das opções listadas acima: ");
 				int escolha = scanner.nextInt();
@@ -63,22 +65,43 @@ public class Main {
 					break;
 
 				case 3:
-					String tarefas = agenda.exibirTarefas();
-                    if (tarefas == null || tarefas.isEmpty()) {
-                        System.out.println("É preciso adicionar tarefas para exibi-las");
-                        System.out.println();
-                    } else {
-                        System.out.println("Tarefas na lista:\n" + tarefas);
-                    }
-                    break;
+					tarefas = agenda.exibirTarefas();
+					if (tarefas == null || tarefas.isEmpty()) {
+						System.out.println("É preciso adicionar tarefas para exibi-las");
+						System.out.println();
+					} else {
+						System.out.println("Tarefas na lista:\n" + tarefas);
+					}
+					break;
 
 				case 4:
-					System.out.println("Saindo do programa. Obrigado!");
-					return;
+				    tarefas = agenda.exibirTarefas();
+				    if (tarefas == null || tarefas.isEmpty()) {
+				        System.out.println("É preciso adicionar tarefas para exibi-las");
+				        System.out.println();
+				    } else {
+				        System.out.println("Tarefas na lista:\n" + tarefas);
+				        System.out.print("Informe a tarefa que foi concluída: ");
+				        scanner.nextLine();
+				        String tarefaConcluida = scanner.nextLine();
 
-				default:
-					System.out.println("Opção inválida. Tente novamente.");
-					break;
+				        agenda.marcarTarefaConcluida(tarefaConcluida);
+				        
+				        System.out.println();
+
+				        System.out.println("Tarefa '" + tarefaConcluida + "' marcada como concluída.");
+				        System.out.println();
+				    }
+				    break;
+					
+				case 5:
+                    System.out.println("Saindo do programa. Obrigado!");
+                    return;
+
+                default:
+                    System.out.println("Opção inválida. Tente novamente.");
+                    break;
+					
 				}
 			}
 
